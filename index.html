@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffe2dc">
+<meta name="description" content="和圓滾滾小倉鼠一起跑跑輪、收集種子，認識圓周運動與動物友善照護。">
+<title>倉鼠跑跑輪｜小小轉圈大冒險</title>
+<style>
+:root{--ink:#563b36;--coral:#f47d62;--orange:#ffad42;--sky:#9deefa;--grass:#d7ef68;--pink:#ffe2dc;--cream:#fffaf0;--line:#e9aaa0;--shadow:0 7px 0 #d99c94}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);font:16px/1.6 "Trebuchet MS","Microsoft JhengHei",system-ui,sans-serif;background:var(--pink);background-image:radial-gradient(#f6a59b55 1.3px,transparent 1.3px);background-size:22px 22px}
+button{font:inherit;cursor:pointer;color:inherit}button:focus-visible{outline:3px solid #4fbfc9;outline-offset:3px}button:disabled{cursor:default;opacity:.65}
+.wrap{width:min(980px,calc(100% - 28px));margin:auto}.top{display:flex;justify-content:space-between;align-items:center;padding:18px 4px 12px}.brand{font-weight:900;letter-spacing:.04em}.brand span{display:inline-grid;place-items:center;background:#fff8e8;border:2px solid var(--ink);width:37px;height:37px;border-radius:50%;margin-right:8px}.sound{border:2px solid var(--ink);border-radius:99px;background:#fff8e8;padding:7px 13px;font-size:13px;box-shadow:0 3px 0 #d99c94}
+h1{text-align:center;font-size:clamp(30px,6vw,50px);margin:7px 0 5px;color:#ff8d28;text-shadow:2px 3px 0 #fff5cf,-1px -1px 0 var(--ink),1px -1px 0 var(--ink),-1px 1px 0 var(--ink),1px 1px 0 var(--ink);letter-spacing:.08em}.subtitle{text-align:center;margin:0 0 17px;font-size:14px;font-weight:700}
+.scene{position:relative;overflow:hidden;border:4px solid white;border-radius:22px;background:var(--sky);box-shadow:var(--shadow);min-height:400px}
+.sky{position:absolute;inset:0 0 30%;background:linear-gradient(#91ebf6,#c6f7ff)}
+.sun{position:absolute;right:7%;top:8%;width:66px;height:66px;background:#ffdc79;border-radius:50%;box-shadow:0 0 0 12px #ffdc7930}
+.cloud{position:absolute;background:#fff;border-radius:50px;width:104px;height:32px;top:11%;left:9%;filter:drop-shadow(0 3px #71ddea40)}.cloud:before,.cloud:after{content:"";position:absolute;background:#fff;border-radius:50%;bottom:7px}.cloud:before{width:41px;height:39px;left:15px}.cloud:after{width:50px;height:47px;left:42px}
+.cloud.two{left:auto;right:28%;top:17%;transform:scale(.67)}
+.grass{position:absolute;left:-2%;right:-2%;bottom:-8px;height:34%;background:linear-gradient(175deg,#dbf37a 0 89%,#c8e660 90%);border-radius:50% 50% 0 0/16% 16% 0 0}
+.grass:before{content:"";position:absolute;inset:0;background:radial-gradient(#a4c844 1px,transparent 2px);background-size:31px 22px;opacity:.7}
+.flower{position:absolute;bottom:17%;font-size:19px}
+.wheel-wrap{position:absolute;left:50%;bottom:8%;width:min(54vw,370px);height:min(54vw,370px);max-width:370px;max-height:370px;transform:translateX(-50%)}
+.wheel{position:absolute;inset:0;border:17px solid #fb8d54;border-radius:50%;background:#ffffff50;box-shadow:inset 0 0 0 7px #fff8d3,0 8px 0 #bd704b,0 12px 18px #79553c30;transition:transform .16s cubic-bezier(.2,.8,.2,1)}
+.wheel:before,.wheel:after{content:"";position:absolute;left:50%;top:50%;background:#f2b36d;transform:translate(-50%,-50%);border-radius:99px}.wheel:before{height:100%;width:7px}.wheel:after{width:100%;height:7px}
+.wheel-inner{position:absolute;inset:13%;border:3px dashed #f4b568;border-radius:50%;pointer-events:none}
+.wheel-foot{position:absolute;width:15px;height:61px;background:#aa7254;bottom:-23px;left:50%;transform:translateX(-50%);border-radius:10px;z-index:0}
+.hamster{position:absolute;width:52%;height:49%;left:24%;top:29%;filter:drop-shadow(0 4px 0 #b57848);transition:transform .18s}
+.hamster.run{animation:bounce .19s infinite alternate ease-in-out}
+@keyframes bounce{to{transform:translateY(-7px) rotate(4deg)}}
+.seed{position:absolute;z-index:3;font-size:28px;animation:seedpop .55s infinite alternate;filter:drop-shadow(0 2px 1px white)}
+@keyframes seedpop{to{transform:translateY(-8px) rotate(12deg)}}
+.bubble{position:absolute;z-index:5;left:50%;top:8%;transform:translateX(-50%);background:#fffdf3;border:2px solid var(--ink);border-radius:20px;padding:8px 14px;font-weight:800;font-size:14px;box-shadow:3px 4px 0 #f4a396;white-space:nowrap}
+.bubble:after{content:"";position:absolute;width:13px;height:13px;background:#fffdf3;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(45deg);bottom:-8px;left:48%}
+.ground-note{position:absolute;right:13px;bottom:8px;font-size:11px;color:#617b38;font-weight:800}
+.panel{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin:20px auto 0;max-width:780px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.stat{background:var(--cream);border:2px solid #f2b6a9;border-radius:14px;text-align:center;padding:8px 4px;box-shadow:0 3px #edc3b6}.stat small{display:block;font-size:11px;font-weight:800;color:#8c6d60}.stat strong{font-size:23px;line-height:1.3}.stat em{font-style:normal;font-size:12px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:center}.btn{border:2px solid var(--ink);border-radius:14px;background:#fffaf0;padding:11px 18px;font-weight:900;box-shadow:0 4px 0 #d99c94;transition:transform .1s,box-shadow .1s}.btn:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 #d99c94}.btn.primary{background:#ffbd48}.btn.run{background:#7fe0d7;min-width:135px}.btn.small{font-size:13px;padding:8px 12px}
+.status{text-align:center;margin:10px 0 0;font-size:13px;font-weight:800;min-height:26px}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px auto 0;max-width:780px}.card{border:2px solid #f1b6aa;background:#fffaf0;border-radius:17px;padding:14px 16px;box-shadow:0 4px 0 #edc3b6}.card h2{font-size:15px;margin:0 0 5px}.card p{font-size:13px;margin:0;color:#765e52}.card b{color:#b85d42}.footer{text-align:center;padding:20px 4px 28px;font-size:11px;color:#85695e}
+[hidden]{display:none!important}
+.overlay{position:fixed;inset:0;z-index:10;background:#533b36aa;display:grid;place-items:center;padding:18px}.modal{width:min(440px,100%);background:var(--cream);border:4px solid white;border-radius:24px;padding:25px;text-align:center;box-shadow:0 8px 0 #d99c94}.modal .big{font-size:60px}.modal h2{margin:5px 0;font-size:25px}.modal p{font-size:14px}.modal-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+@media(max-width:620px){.scene{min-height:340px}.wheel-wrap{width:min(72vw,320px);height:min(72vw,320px);bottom:4%}.wheel{border-width:13px}.panel{grid-template-columns:1fr}.stats{gap:6px}.stat{padding:6px 2px}.stat strong{font-size:20px}.actions{gap:8px}.btn.run{flex:1;max-width:210px}.info{grid-template-columns:1fr}.cloud{left:4%;transform:scale(.8)}.cloud.two{right:14%}.footer{padding-bottom:18px}}
+@media(max-width:380px){.scene{min-height:300px}.wheel-wrap{width:76vw;height:76vw}.stat small{font-size:10px}.stat strong{font-size:18px}.btn{padding:9px 13px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand"><span>🐹</span>迷你動物觀察室</div><button class="sound" id="soundBtn" type="button" aria-pressed="false">🔈 音效：關</button></header>
+<main>
+<h1>倉鼠跑跑輪</h1><p class="subtitle">小小轉圈大冒險 ✦ 點一下，陪麻糬跑一圈！</p>
+<section class="scene" aria-label="倉鼠在跑輪上的遊戲場景">
+<div class="sky"></div><div class="sun" aria-hidden="true"></div><div class="cloud"></div><div class="cloud two"></div>
+<div class="grass"></div><span class="flower" style="left:8%">🌼</span><span class="flower" style="right:10%;bottom:22%">🌱</span>
+<div class="bubble" id="bubble">嗨！要陪我跑跑嗎？</div>
+<div class="wheel-wrap" aria-label="跑輪">
+<div class="wheel" id="wheel"><div class="wheel-inner"></div></div>
+<svg class="hamster" id="hamster" viewBox="0 0 200 170" role="img" aria-label="圓滾滾的奶油色倉鼠麻糬">
+<ellipse cx="102" cy="142" rx="60" ry="16" fill="#c88b58"/>
+<ellipse cx="100" cy="100" rx="70" ry="56" fill="#f5e8ca" stroke="#754c39" stroke-width="5"/>
+<ellipse cx="48" cy="54" rx="23" ry="26" fill="#f4d8b2" stroke="#754c39" stroke-width="5"/>
+<ellipse cx="48" cy="55" rx="12" ry="15" fill="#f3a6a0"/>
+<ellipse cx="151" cy="54" rx="23" ry="26" fill="#f4d8b2" stroke="#754c39" stroke-width="5"/>
+<ellipse cx="151" cy="55" rx="12" ry="15" fill="#f3a6a0"/>
+<path d="M45 104Q46 76 73 67Q102 54 130 69Q155 83 155 111Q154 139 101 143Q47 140 45 104Z" fill="#fff9ed"/>
+<ellipse cx="77" cy="96" rx="6" ry="8" fill="#3e302e"/><ellipse cx="125" cy="96" rx="6" ry="8" fill="#3e302e"/>
+<circle cx="75" cy="93" r="2" fill="white"/><circle cx="123" cy="93" r="2" fill="white"/>
+<ellipse cx="59" cy="114" rx="12" ry="7" fill="#f6a6a0" opacity=".8"/><ellipse cx="141" cy="114" rx="12" ry="7" fill="#f6a6a0" opacity=".8"/>
+<path d="M95 109Q101 103 107 109Q105 116 101 116Q97 115 95 109Z" fill="#d97978"/>
+<path d="M101 116Q98 126 89 122M102 116Q106 126 115 121" fill="none" stroke="#754c39" stroke-width="3" stroke-linecap="round"/>
+<path d="M45 117L20 112M45 123L21 126M155 117L179 112M155 123L179 126" stroke="#9b7358" stroke-width="2" stroke-linecap="round"/>
+<ellipse cx="71" cy="147" rx="15" ry="7" fill="#efc998"/><ellipse cx="130" cy="147" rx="15" ry="7" fill="#efc998"/>
+</svg>
+<div class="wheel-foot"></div>
+</div>
+<div id="seed" class="seed" hidden aria-label="出現的葵花籽">🌻</div><div class="ground-note">麻糬的安全小草地</div>
+</section>
+<section class="panel" aria-label="遊戲資訊與操作">
+<div class="stats">
+<div class="stat"><small>剩餘時間</small><strong id="time">20</strong><em> 秒</em></div>
+<div class="stat"><small>跑輪轉數</small><strong id="laps">0</strong><em> 圈</em></div>
+<div class="stat"><small>收集種子</small><strong id="seeds">0</strong><em> 顆</em></div>
+<div class="stat"><small>估計距離</small><strong id="distance">0</strong><em> 公尺</em></div>
+</div>
+<div class="actions"><button class="btn run" id="runBtn" type="button" disabled>🐾 跑一圈！</button><button class="btn primary" id="startBtn" type="button">開始遊戲</button></div>
+</section>
+<p class="status" id="status" aria-live="polite">按「開始遊戲」，再點跑圈按鈕或按空白鍵。收集跳出的葵花籽！</p>
+<section class="info">
+<article class="card"><h2>🔎 小小圓周運動</h2><p>假設跑輪半徑是 <b>0.15 公尺</b>，一圈距離約為 2πr。麻糬每跑一圈，遊戲就把估算距離加上約 <b>0.94 公尺</b>。</p></article>
+<article class="card"><h2>💚 動物友善提醒</h2><p>這是虛構的遊戲數值，不代表真實倉鼠的速度或運動建議。真實照護要提供合適、安全的環境與休息，並依可靠的動物照護資訊判斷。</p></article>
+</section>
+</main>
+<footer class="footer">跨領域主題：動物行為觀察 × 圓周運動 × 遊戲設計<br>單人小遊戲 · 手機可點擊，電腦也可按空白鍵</footer>
+</div>
+<div class="overlay" id="result" hidden>
+<div class="modal" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+<div class="big" id="resultFace">🐹</div><h2 id="resultTitle">麻糬的跑輪日記</h2><p id="resultText"></p><p id="resultMath"></p>
+<div class="modal-actions"><button class="btn primary" id="againBtn" type="button">再玩一次</button><button class="btn" id="closeBtn" type="button">回到草地</button></div>
+</div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const circumference=2*Math.PI*0.15, gameLength=20;
+let remaining=gameLength,laps=0,seeds=0,timer=null,active=false,rotation=0,soundOn=false,audioCtx=null;
+function update(){ $('time').textContent=remaining;$('laps').textContent=laps;$('seeds').textContent=seeds;$('distance').textContent=(laps*circumference).toFixed(1); }
+function start(){clearInterval(timer);remaining=gameLength;laps=0;seeds=0;rotation=0;active=true;$('result').hidden=true;$('runBtn').disabled=false;$('startBtn').disabled=true;$('startBtn').textContent='遊戲進行中';$('bubble').textContent='跑起來～種子要出現囉！';$('status').textContent='點「跑一圈！」或按空白鍵，連續跑圈收集葵花籽！';$('hamster').classList.remove('run');update();timer=setInterval(()=>{remaining--;update();if(remaining<=0)finish()},1000);$('runBtn').focus();}
+function chirp(){if(!soundOn)return;try{audioCtx??=new(window.AudioContext||window.webkitAudioContext)();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.frequency.value=680;g.gain.value=.045;o.start();o.stop(audioCtx.currentTime+.06)}catch(e){}}
+function runLap(){if(!active)return;laps++;rotation+=90;$('wheel').style.transform='rotate('+rotation+'deg)';$('hamster').classList.remove('run');void $('hamster').offsetWidth;$('hamster').classList.add('run');setTimeout(()=>$('hamster').classList.remove('run'),240);chirp();
+if(laps%4===0){seeds++;$('bubble').textContent='耶！找到一顆葵花籽 🌻';$('status').textContent='麻糬跑了 '+laps+' 圈，收集到 '+seeds+' 顆種子！';const seed=$('seed');seed.hidden=false;seed.style.left=(20+Math.random()*58)+'%';seed.style.top=(35+Math.random()*25)+'%';setTimeout(()=>seed.hidden=true,600)}else{$('bubble').textContent=['呼呼～','跑得好開心！','再一圈！'][laps%3];}
+update();}
+function finish(){if(!active)return;active=false;clearInterval(timer);$('runBtn').disabled=true;$('startBtn').disabled=false;$('startBtn').textContent='再玩一次';$('hamster').classList.remove('run');$('bubble').textContent='跑完要休息一下喔！';const title=laps>=35?'跑輪小冠軍！':laps>=18?'活力小跑手！':'慢慢跑也很棒！';$('resultTitle').textContent=title;$('resultFace').textContent=laps>=18?'🐹🌻':'🐹';$('resultText').textContent='麻糬跑了 '+laps+' 圈，收集 '+seeds+' 顆種子。每一圈估計 '+circumference.toFixed(2)+' 公尺。';$('resultMath').textContent='估算距離 = '+laps+' 圈 × 2π × 0.15 公尺 = '+(laps*circumference).toFixed(1)+' 公尺（遊戲示意）';$('result').hidden=false;$('againBtn').focus();}
+$('runBtn').addEventListener('click',runLap);$('startBtn').addEventListener('click',start);$('againBtn').addEventListener('click',start);$('closeBtn').addEventListener('click',()=>{$('result').hidden=true;$('startBtn').focus()});$('soundBtn').addEventListener('click',()=>{soundOn=!soundOn;$('soundBtn').textContent=soundOn?'🔊 音效：開':'🔈 音效：關';$('soundBtn').setAttribute('aria-pressed',String(soundOn));});
+document.addEventListener('keydown',e=>{if(e.code==='Space'&&!['BUTTON','INPUT'].includes(document.activeElement.tagName)&&$('result').hidden){e.preventDefault();runLap()}if(e.code==='Escape'&&!$('result').hidden)$('result').hidden=true});
+update();
+</script>
+</body>
+</html>
